@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>연우의 컬러 사이트</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial;
+      font-size: 30px;
+      color: white;
+      transition: background-color 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+  화면을 클릭해 😎
+
+  <script>
+    const colors = ["red", "blue", "green", "purple", "orange", "black"];
+    let index = 0;
+
+    document.body.onclick = function() {
+      index = (index + 1) % colors.length;
+      document.body.style.backgroundColor = colors[index];
+    };
+  </script>
+
+</body>
+</html>
