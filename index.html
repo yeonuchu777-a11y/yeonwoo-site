@@ -1,33 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>연우의 컬러 사이트</title>
+  <title>엄마, 게임 허락 요청 시스템</title>
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      text-align: center;
+      margin-top: 100px;
       font-family: Arial;
-      font-size: 30px;
+      background-color: #eef2f3;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #2196F3;
       color: white;
-      transition: background-color 0.5s;
+    }
+
+    button:disabled {
+      background-color: gray;
+    }
+
+    #timer {
+      font-size: 24px;
+      margin-top: 20px;
+      color: red;
     }
   </style>
 </head>
 <body>
 
-  화면을 클릭해 😎
+  <h1>🎮 게임 허락 요청 시스템</h1>
+
+  <p>
+    <input type="checkbox" id="homework" onchange="checkReady()">
+    숙제 완료 ✔
+  </p>
+
+  <p>
+    게임 시간: 1시간 30분
+  </p>
+
+  <button id="startBtn" onclick="startGame()" disabled>
+    허락 요청
+  </button>
+
+  <div id="timer"></div>
 
   <script>
-    const colors = ["red", "blue", "green", "purple", "orange", "black"];
-    let index = 0;
+    let countdown;
 
-    document.body.onclick = function() {
-      index = (index + 1) % colors.length;
-      document.body.style.backgroundColor = colors[index];
-    };
+    function checkReady() {
+      const hw = document.getElementById("homework");
+      document.getElementById("startBtn").disabled = !hw.checked;
+    }
+
+    function startGame() {
+      let seconds = 5400; // 1시간 30분 = 5400초
+      const timerDisplay = document.getElementById("timer");
+
+      alert("약속: 시간 끝나면 바로 종료합니다.");
+
+      countdown = setInterval(function() {
+
+        let minutes = Math.floor(seconds / 60);
+        let secs = seconds % 60;
+
+        timerDisplay.textContent =
+          "남은 시간: " + minutes + "분 " + secs + "초";
+
+        seconds--;
+
+        if (seconds < 0) {
+          clearInterval(countdown);
+          alert("⏰ 시간 종료! 바로 종료합니다.");
+          timerDisplay.textContent = "게임 종료 ✔";
+        }
+
+      }, 1000);
+    }
   </script>
 
 </body>
